@@ -14,6 +14,7 @@ mongoose.connect(
 const Schema = mongoose.Schema;
 const storesScheme = new Schema({
   title: String,
+  brand: String,
   image: String,
   price: Number,
   quantity: Number,
@@ -53,6 +54,11 @@ router.post(
     .trim()
     .withMessage("item name must be specified")
     .escape(),
+  body("brand")
+    .isLength({ min: 2 })
+    .trim()
+    .withMessage("item brand must be specified")
+    .escape(),
   body("image")
     .isLength({ min: 1 })
     .trim()
@@ -76,6 +82,7 @@ router.post(
   function (req, res, next) {
     const store = new Store({
       title: req.body.storeTitle,
+      brand: req.body.storeBrand,
       image: req.body.storeImage,
       price: parseInt(req.body.storePrice),
       quantity: parseInt(req.body.storeQuantity),
@@ -118,6 +125,11 @@ router.put(
     .trim()
     .withMessage("item name must be specified")
     .escape(),
+  body("brand")
+    .isLength({ min: 2 })
+    .trim()
+    .withMessage("item brand must be specified")
+    .escape(),
   body("image")
     .isLength({ min: 1 })
     .trim()
@@ -143,6 +155,7 @@ router.put(
       req.body.storeId,
       {
         title: req.body.storeTitle,
+        brand: req.body.storeBrand,
         image: req.body.storeImage,
         price: parseInt(req.body.storePrice),
         quantity: parseInt(req.body.storeQuantity),
