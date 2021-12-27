@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 
 const expiresIn = "60m";
-const tokenKey = "Our Token Key"; // Save in .env !!!
+const tokenKey = "Our Token Key";
 
 function parseBearer(bearer, headers) {
   let token = null;
